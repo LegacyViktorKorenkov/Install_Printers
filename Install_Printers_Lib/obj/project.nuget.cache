@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "tawg0BgMoILuArsFu1QIjFqOYB/21fsRUdy44JF5y8oV7NfrXh3/2DvEcrtxJwQjO8uaVTX1jGNRQAYA+bOmPA==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\Work\\Install_Printers_WPF\\Install_Printers_Lib\\Install_Printers_Lib_core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Patrik\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\system.management\\5.0.0\\system.management.5.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\system.security.accesscontrol\\5.0.0\\system.security.accesscontrol.5.0.0.nupkg.sha512",
+    "C:\\Users\\Patrik\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

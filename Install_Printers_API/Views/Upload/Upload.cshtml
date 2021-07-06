@@ -1,0 +1,31 @@
+﻿@using Install_Printers_API.Context
+@model DataContext
+@{ }
+
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <title>Загрузка файла драйвера принтера</title>
+    <link href="~/css/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <main>
+        <form asp-action="UploadFile" asp-controller="Upload" method="post" enctype='multipart/form-data'>
+            <span>Модель принтера</span>
+            <input type="text" name="PrinterName" placeholder="Модель принтера" required />
+            <span>Сетевой принтер</span>
+            <input type="checkbox" name="NetPrinter" />
+            <span>Сетевой путь к zip файлу драйвера</span>
+            <input type="text" name="uploadFile" required />
+            <input class="button" type="submit" value="Отправить" />
+        </form>
+        <h5>@ViewData["message"]</h5>
+        @*<h3>Загруженные принтеры</h3>
+        @foreach (var t in Model.Printers)
+        {
+            <span>@t.PrinterName</span>
+        }*@
+    </main>
+</body>
+</html>

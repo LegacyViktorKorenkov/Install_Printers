@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="utf-8">
+    <title>Загрузка файла драйвера принтера</title>
+    <link href="~/css/Style.css" rel="stylesheet" />
+</head>
+<body>
+    <main>
+        <form asp-action="UploadFile" asp-controller="Upload" method="post" >
+            <span>Модель принтера</span>
+            <input type="text" name="PrinterName" placeholder="Модель принтера" required />
+            <span>Сетевой принтер</span>
+            <input type="checkbox" name="NetPrinter" />
+            <span>Файл драйвера</span>
+            <input type="text" name="uploadFile" enctype='multipart/form-data' required />
+            <input class="button" type="submit" value="Отправить" />
+        </form>
+    </main>
+</body>
+</html>

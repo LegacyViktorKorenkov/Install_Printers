@@ -1,0 +1,19 @@
+﻿<Application
+    x:Class="Install_Printers.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Install_Printers"
+    StartupUri="Windows/LoadWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="Style/DarkStyle.xaml" />
+                <ResourceDictionary
+                    Source="Style/Colors.xaml" />
+                <ResourceDictionary
+                    Source="Style/Window.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

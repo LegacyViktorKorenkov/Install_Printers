@@ -1,0 +1,8 @@
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\bin\Debug\netcoreapp3.1\Install_Printers_Lib.deps.json
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\bin\Debug\netcoreapp3.1\Install_Printers_Lib.dll
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\bin\Debug\netcoreapp3.1\Install_Printers_Lib.pdb
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\obj\Debug\netcoreapp3.1\Install_Printers_Lib.AssemblyInfoInputs.cache
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\obj\Debug\netcoreapp3.1\Install_Printers_Lib.AssemblyInfo.cs
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\obj\Debug\netcoreapp3.1\Install_Printers_Lib.dll
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\obj\Debug\netcoreapp3.1\Install_Printers_Lib.pdb
+E:\Projects\InstallPrintersProjects\Install_Printers_WPF\Install_Printers_Lib\obj\Debug\netcoreapp3.1\Install_Printers_Lib.csprojAssemblyReference.cache

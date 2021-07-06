@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "rTc3B6YUTVwID6FKXVh/m50eWiKEBIU7U7mcn+1sWM9totNJn0RIbdWPev6XWk8gwWxKKctNh6v9zQqBrcZrLw==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\Work\\Install_Printers_WPF\\TestInstallPrintersApp\\TestInstallPrintersApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Patrik\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
