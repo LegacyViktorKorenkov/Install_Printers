@@ -1,2 +1,2 @@
 # Install_Printers
-Easy Printer Installer Repository
+Easy Printer Installer
