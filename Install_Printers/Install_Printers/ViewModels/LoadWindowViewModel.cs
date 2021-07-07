@@ -12,11 +12,15 @@ using System.Windows.Input;
 
 namespace Install_Printers.ViewModels
 {
+
     class LoadWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string _output;
+        /// <summary>
+        /// Service messages
+        /// </summary>
         public string Output
         {
             get => _output;
@@ -26,17 +30,20 @@ namespace Install_Printers.ViewModels
             }
         }
 
-        private bool _startProgBar;
-        public bool StartProgBar
+        private bool _isProgressBarStart;
+        /// <summary>
+        /// Progress bar management
+        /// </summary>
+        public bool IsProgressBarStart
         {
-            get => _startProgBar;
+            get => _isProgressBarStart;
             set
             {
-                _startProgBar = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StartProgBar)));
+                _isProgressBarStart = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsProgressBarStart)));
             }
         }
 
-        Use_Install_Printers_Api api;
+        private Use_Install_Printers_Api api;
 
         public ICommand CloseLoadWindow => new RelayCommand<object>(obj =>
         {
@@ -49,32 +56,32 @@ namespace Install_Printers.ViewModels
 
             api = new Use_Install_Printers_Api();
 
-            StartProgBar = true;
+            IsProgressBarStart = true;
 
             Task.Run(() => LoadData());
         }
 
+        /// <summary>
+        /// Download the required data
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadData()
         {
             List<Printer> tempPrintersList = await api.GetPrinters();
 
-            if (CheckList(tempPrintersList))
+            if (tempPrintersList.Count > 0)
                 Application.Current.Dispatcher.Invoke(() => LoadMainWindow(tempPrintersList));
             else
             {
-                StartProgBar = false;
+                IsProgressBarStart = false;
                 Output = "Ошибка загрузки данных. Повторите попытку позже или проверьте подключение.";
             }
         }
 
-        private bool CheckList(List<Printer> printers)
-        {
-            if (printers.Count > 0)
-                return true;
-            else
-                return false;
-        }
-
+        /// <summary>
+        /// Passes the data context and loads the main window
+        /// </summary>
+        /// <param name="printers"></param>
         private void LoadMainWindow(List<Printer> printers)
         {
             MainViewModel mainView = new MainViewModel(printers);

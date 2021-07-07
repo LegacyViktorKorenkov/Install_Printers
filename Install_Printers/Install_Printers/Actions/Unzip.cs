@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Install_Printers.Actions
 {
+    /// <summary>
+    /// Contains the logic for unpacking the archive with the driver
+    /// </summary>
     class Unzip
     {
         private string _packageName;
@@ -16,6 +19,10 @@ namespace Install_Printers.Actions
             _packageName = packagePath;
         }
 
+        /// <summary>
+        /// Unpacks the driver to a temporary folder
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> UnzipDriver()
         {
             //Directory.CreateDirectory($@"{_packageName}");

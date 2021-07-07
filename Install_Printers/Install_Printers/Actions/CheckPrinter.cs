@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Install_Printers.Actions
 {
+    /// <summary>
+    /// Contains logic for checking printer statuses and driver availability
+    /// </summary>
     static class CheckPrinter
     {
         public static async Task<bool> CheckLanStatus(this string netName)
@@ -33,21 +36,21 @@ namespace Install_Printers.Actions
         }
 
         /// <summary>
-        /// Метод получает установленные на компьютере драйверы принтеров и сравнивает с названием модели выбранного принтера.
-        /// Если возникнет совпадение модели и драйвера, то метод возвращает значение true 
-        /// и  драйвер устанавливаться не будет, произойдет только подключение принтера
+        /// The method gets the printer drivers installed on the computer and compares them with the model name of the selected printer.
+        /// If there is a match between the model and the driver, then the method returns true
+        /// and the driver will not be installed, only the printer will be connected
         /// </summary>
         /// <param name="printerName"></param>
         /// <returns></returns>
         public static string GetPrinterDriver(this Printer printer)
         {
-            // Экземпляр класса ManagementObjectSearcher для работы с WMI объектом Win32_PrinterDriver
+            // An instance of the ManagementObjectSearcher class for working with the WMI object Win32_PrinterDriver
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_PrinterDriver");
 
-            // Цикл для сравнения полученных имен драйверов и названия выбранной модели
+            // Loop to compare the received driver names and the name of the selected model 
             foreach (ManagementObject queryObj in searcher.Get())
             {
-                // сравнение название модели и имени принтера. При совпадении метод вернет true
+                // compare model name and printer name. If matched, the method will return true
                 if (queryObj["Name"].ToString().Contains(printer.PrinterName))
                 {
                     var prnDrvName = queryObj["Name"].ToString();
@@ -60,7 +63,7 @@ namespace Install_Printers.Actions
                 }
             }
 
-            // ответ метода при отсутствии совпадений
+            // method response if there are no matches
             return string.Empty;
         }
     }

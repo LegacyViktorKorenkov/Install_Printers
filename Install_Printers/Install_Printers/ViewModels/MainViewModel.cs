@@ -18,60 +18,73 @@ namespace Install_Printers.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        Use_Install_Printers_Api api;
+        Use_Install_Printers_Api _api;
 
-        private Printer printerDriver;
+        private Printer _printerDriver;
 
-        private string output;
+        private string _output;
+        /// <summary>
+        /// Service messages
+        /// </summary>
         public string Output
         {
-            get => output;
-            set { output = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Output))); }
+            get => _output;
+            set { _output = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Output))); }
         }
 
-        private string selectedPrinter;
+        private string _selectedPrinter;
+        /// <summary>
+        /// Selected printer object
+        /// </summary>
         public string SelectedPrinter
         {
-            get => selectedPrinter;
+            get => _selectedPrinter;
             set
             {
                 Task.Run(async () =>
                 {
-                    selectedPrinter = value;
+                    _selectedPrinter = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedPrinter)));
                     await GetInstallPrinterInfo();
-                    if (printerDriver != null && printerDriver.NetPrinter) NetworkPrinter = true;
-                    else NetworkPrinter = false;
+                    if (_printerDriver != null && _printerDriver.NetPrinter) IsNetworkPrinter = true;
+                    else IsNetworkPrinter = false;
                 });
             }
         }
 
-        private string printerNetName;
+        private string _printerNetName;
+        /// <summary>
+        /// Printer network name
+        /// </summary>
         public string PrinterNetName
         {
-            get => printerNetName;
-            set { printerNetName = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrinterNetName))); }
+            get => _printerNetName;
+            set { _printerNetName = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PrinterNetName))); }
         }
 
         private ObservableCollection<Printer> printers;
+        /// <summary>
+        /// List of printers connected to the computer
+        /// </summary>
         public ObservableCollection<Printer> Printers
         {
             get => printers;
             set { printers = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Printers))); }
         }
 
-        private bool networkPrinter;
-        public bool NetworkPrinter
+        private bool _isNetworkPrinter;
+
+        public bool IsNetworkPrinter
         {
-            get => networkPrinter;
-            set { networkPrinter = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NetworkPrinter))); }
+            get => _isNetworkPrinter;
+            set { _isNetworkPrinter = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsNetworkPrinter))); }
         }
 
-        private bool isStartProgressBar;
+        private bool _isStartProgressBar;
         public bool IsStartProgressBar
         {
-            get => isStartProgressBar;
-            set { isStartProgressBar = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsStartProgressBar))); }
+            get => _isStartProgressBar;
+            set { _isStartProgressBar = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsStartProgressBar))); }
         }
 
         private ObservableCollection<string> instaledPrintersList;
@@ -97,17 +110,17 @@ namespace Install_Printers.ViewModels
 
             Output = "Проверка введенных данных";
 
-            if (NetworkPrinter)
+            if (_isStartProgressBar)
             {
                 if (!string.IsNullOrWhiteSpace(PrinterNetName) && await PrinterNetName.CheckLanStatus())
                 {
-                    if (printerDriver.NetPrinter)
+                    if (_printerDriver.NetPrinter)
                     {
                         try
                         {
                             Output = "Установка.";
                             IsStartProgressBar = true;
-                            install = new InstallDrivers(printerDriver, PrinterNetName, new Unzip($@"Temp\{SelectedPrinter}"));
+                            install = new InstallDrivers(_printerDriver, PrinterNetName, new Unzip($@"Temp\{SelectedPrinter}"));
                             await install.Start();
 
                             InstaledPrintersList = new ObservableCollection<string>(new PrintersInfo().InstalledPrinters());
@@ -149,7 +162,7 @@ namespace Install_Printers.ViewModels
                 {
                     Output = "Установка.";
                     IsStartProgressBar = true;
-                    install = new InstallDrivers(printerDriver, new Unzip($@"Temp\{SelectedPrinter}"));
+                    install = new InstallDrivers(_printerDriver, new Unzip($@"Temp\{SelectedPrinter}"));
                     await install.Start();
 
                     InstaledPrintersList = new ObservableCollection<string>(new PrintersInfo().InstalledPrinters());
@@ -237,7 +250,7 @@ namespace Install_Printers.ViewModels
 
         public ICommand RefreshPrintersList => new RelayCommand<object>(async obj =>
         {
-            var temp = await api.GetPrinters();
+            var temp = await _api.GetPrinters();
 
             Printers = new ObservableCollection<Printer>(temp.OrderBy(x => x.PrinterName));
 
@@ -246,7 +259,7 @@ namespace Install_Printers.ViewModels
 
         public MainViewModel(List<Printer> printers)
         {
-            api = new Use_Install_Printers_Api();
+            _api = new Use_Install_Printers_Api();
 
             Printers = new ObservableCollection<Printer>(printers.OrderBy(x => x.PrinterName));
 
@@ -266,7 +279,7 @@ namespace Install_Printers.ViewModels
             {
                 if (p.PrinterName == SelectedPrinter)
                 {
-                    printerDriver = await api.GetPrinterDriver(p.Id);
+                    _printerDriver = await _api.GetPrinterDriver(p.Id);
 
                     break;
                 }

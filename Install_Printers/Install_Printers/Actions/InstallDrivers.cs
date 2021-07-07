@@ -12,19 +12,37 @@ using System.Windows;
 
 namespace Install_Printers.Actions
 {
+    /// <summary>
+    /// Contains the logic of the driver installation process
+    /// </summary>
     class InstallDrivers
     {
         //public delegate void OutDelegate(string outPut);
         //public event OutDelegate OutEvent;
 
+        /// <summary>
+        /// Printer object
+        /// </summary>
         public Printer Printer { get; set; }
 
+        /// <summary>
+        /// Printer network name
+        /// </summary>
         public string NetName { get; set; }
 
+        /// <summary>
+        /// Path to printer driver
+        /// </summary>
         public string DriverPath { get; set; }
 
+        /// <summary>
+        /// Unpacker object
+        /// </summary>
         private Unzip _unzip;
 
+        /// <summary>
+        /// Printer driver name
+        /// </summary>
         private string _driverName;
 
         public InstallDrivers(Printer printer, string netName, Unzip unzip)
@@ -40,6 +58,10 @@ namespace Install_Printers.Actions
             _unzip = unzip;
         }
 
+        /// <summary>
+        /// Downloads, unpacks and runs the driver installation
+        /// </summary>
+        /// <returns></returns>
         private async Task InstallPrinterDriver()
         {
             _driverName = Printer.GetPrinterDriver();
@@ -76,8 +98,8 @@ namespace Install_Printers.Actions
         }
 
         /// <summary>
-        /// Метод создает сетевой порт принтера в соответствии с введенным именем принтера 
-        /// и подключает принтер с именем соответствующим выбранному в cmbPrintersModel
+        /// The method creates a network printer port according to the entered printer name
+        /// and connects a printer with a name corresponding to the one selected in cmbPrintersModel 
         /// </summary>
         /// <param name="printerName"></param>
         /// <param name="lanName"></param>
@@ -162,6 +184,12 @@ namespace Install_Printers.Actions
             }
         }
 
+        /// <summary>
+        /// Creates a process to install the driver
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
         private ProcessStartInfo CreateProcessStartInfo(string fileName, string arguments)
         {
             return new ProcessStartInfo()
@@ -173,6 +201,10 @@ namespace Install_Printers.Actions
             };
         }
 
+        /// <summary>
+        /// Running the entire installation cycle
+        /// </summary>
+        /// <returns></returns>
         public async Task Start()
         {
             try
@@ -185,6 +217,10 @@ namespace Install_Printers.Actions
             }
         }
 
+        /// <summary>
+        /// Get driver name from .inf file
+        /// </summary>
+        /// <returns></returns>
         private async Task<string> GetDriverName()
         {
             string tempDriverName = string.Empty;
@@ -203,6 +239,10 @@ namespace Install_Printers.Actions
             return tempDriverName.Remove(tempDriverName.LastIndexOf('"')).Remove(0, tempDriverName.IndexOf('"')).Trim().Trim('"');
         }
 
+        /// <summary>
+        /// Creates a process object for installing a driver
+        /// </summary>
+        /// <returns></returns>
         private async Task InstallProcess()
         {
             await Task.Run(() =>
@@ -248,11 +288,19 @@ namespace Install_Printers.Actions
             });
         }
 
+        /// <summary>
+        /// Receives all.сab packages 
+        /// </summary>
+        /// <returns></returns>
         private List<string> GetCab()
         {
             return Directory.GetFiles(DriverPath, "*.cab", SearchOption.AllDirectories).ToList();
         }
 
+        /// <summary>
+        /// Unpacks the driver
+        /// </summary>
+        /// <returns></returns>
         private async Task<bool> UnzipDriver()
         {
             try

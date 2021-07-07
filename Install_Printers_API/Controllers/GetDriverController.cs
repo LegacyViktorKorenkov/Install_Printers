@@ -70,26 +70,26 @@ namespace Install_Printers_API.Controllers
                 await GetFormInfo();
 
                 Directory.CreateDirectory($@"wwwroot\Drivers\{_printerName}");
-                // Путь к файлу сохранения.
+                // Path to the save file.
                 string filePath = $@"wwwroot\Drivers\{_printerName}";
-                // Имя сохраняемого файла.
+                // The name of the saved file. 
                 string fileName = $@"{_printerName}-driver.zip";
-                // Полный путь к сохраняемому файлу.
+                // Full path to the saved file.
                 string path = Path.Combine(filePath, fileName);
 
                 log.LogWarning($"путь сохранения: {path}\n");
 
                 _section = await _reader.ReadNextSectionAsync();
 
-                //Поток считанной части запроса.
+                // Stream of the read part of the request.
                 using (Stream fileStream = _section.Body)
                 {
                     if (fileStream != null)
                     {
-                        // Поток для записи файла.
+                        // Stream for writing the file.
                         using (FileStream writeStream = new FileStream(path, FileMode.Create))
                         {
-                            // Копировать данные считанного потока в поток записи файла.
+                            // Copy the data of the created stream to the file write stream.
                             fileStream.CopyTo(writeStream);
                         }
                     }

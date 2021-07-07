@@ -10,7 +10,7 @@ namespace Install_Printers.Actions
     class WindowsUsage
     {
         /// <summary>
-        /// Метод закрытия окон
+        /// Method for closing windows
         /// </summary>
         /// <param name="WindowName"></param>
         public static void CloseWindow(string WindowName)
