@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = Install_Printers_API
-build_property.ProjectDir = E:\CurrentVersionInstallPrinters\Install_Printers_WPF\Install_Printers_API\
+build_property.ProjectDir = C:\Users\IAmHereByMistake\Documents\Stuff\OldRepositories\Install_Printers\Install_Printers_API\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
